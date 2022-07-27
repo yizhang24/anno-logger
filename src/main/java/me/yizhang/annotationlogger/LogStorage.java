@@ -58,4 +58,12 @@ public class LogStorage {
             e.printStackTrace();
         }
     }
+
+    public void close() {
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

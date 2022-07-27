@@ -102,7 +102,6 @@ public class LoggingSystem {
         } else {
             name = loggedClass.getSimpleName();
         }
-        System.out.println("Logger registered " + name + " with " + String.join(", ", headers));
         LogStorage store = new LogStorage(name, headers);
         mStorage.add(store);
         return subsystemIndex;
@@ -201,6 +200,15 @@ public class LoggingSystem {
             }
 
         }
+    }
+
+    public void reset() {
+        mLogWriter.close();
+        mQueue.clear();
+        mStorage.clear();
+        mElements.clear();
+        mLogWriter.updateStorage(mStorage);
+        mLogDirectory = null;
     }
 
     public void updateStorage() {

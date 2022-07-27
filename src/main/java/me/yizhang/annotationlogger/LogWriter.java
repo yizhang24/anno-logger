@@ -29,7 +29,7 @@ public class LogWriter extends Thread {
             }
 
             if (isInterrupted()) {
-                close();
+                flush();
                 break;
             }
             
@@ -53,9 +53,15 @@ public class LogWriter extends Thread {
         store.writeData(entry.getValues());
     }
 
-    public void close() {
+    public void flush() {
         for (int i = 0; i < storage.size(); i++) {
             storage.get(i).flush();
+        }
+    }
+
+    public void close() {
+        for (int i = 0; i < storage.size(); i++) {
+            storage.get(i).close();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.team1678;
+package me.yizhang.annotationlogger.team1678;
 
 import java.util.ArrayList;
 import java.lang.reflect.Field;

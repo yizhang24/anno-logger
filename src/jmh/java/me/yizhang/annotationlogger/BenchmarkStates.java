@@ -12,6 +12,8 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 
 import me.yizhang.annotationlogger.Log;
+import me.yizhang.annotationlogger.team1678.ReflectingLogStorage;
+import me.yizhang.annotationlogger.team254.ReflectingCSVWriter;
 
 public class BenchmarkStates {
 
@@ -63,7 +65,7 @@ public class BenchmarkStates {
 
     @State(Scope.Thread)
     public static class instances254 {
-        public com.team254.ReflectingCSVWriter<TestData> mWriter;
+        public ReflectingCSVWriter<TestData> mWriter;
 
         public static final String file = path + "254Log.csv";
 
@@ -86,7 +88,7 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            mWriter = new com.team254.ReflectingCSVWriter<>(file, TestData.class);
+            mWriter = new ReflectingCSVWriter<>(file, TestData.class);
         }
 
         @TearDown(Level.Iteration)
@@ -99,8 +101,8 @@ public class BenchmarkStates {
     @State(Scope.Thread)
     public static class instances1678r {
 
-        public com.team1678.LoggingSystem reflectingLoggingSystem;
-        public com.team1678.ReflectingLogStorage<TestData> reflectiveStorage;
+        public me.yizhang.annotationlogger.team1678.LoggingSystem reflectingLoggingSystem;
+        public ReflectingLogStorage<TestData> reflectiveStorage;
 
         @Setup(Level.Iteration)
         public void setup() {
@@ -121,8 +123,8 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            reflectingLoggingSystem = new com.team1678.LoggingSystem();
-            reflectiveStorage = new com.team1678.ReflectingLogStorage<>(TestData.class);
+            reflectingLoggingSystem = new me.yizhang.annotationlogger.team1678.LoggingSystem();
+            reflectiveStorage = new ReflectingLogStorage<>(TestData.class);
             reflectingLoggingSystem.register(reflectiveStorage, "1678ReflectiveLog.csv");
         }
 
@@ -136,8 +138,8 @@ public class BenchmarkStates {
     @State(Scope.Thread)
     public static class instances1678m {
 
-        public com.team1678.LoggingSystem manualLoggingSystem;
-        public com.team1678.LogStorage manualStorage = new com.team1678.LogStorage();
+        public me.yizhang.annotationlogger.team1678.LoggingSystem manualLoggingSystem;
+        public me.yizhang.annotationlogger.team1678.LogStorage manualStorage = new me.yizhang.annotationlogger.team1678.LogStorage();
 
         @Setup(Level.Iteration)
         public void setup() {
@@ -158,7 +160,7 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            manualLoggingSystem = new com.team1678.LoggingSystem();
+            manualLoggingSystem = new me.yizhang.annotationlogger.team1678.LoggingSystem();
 
             ArrayList<String> headers = new ArrayList<String>();
             headers.add("datax");

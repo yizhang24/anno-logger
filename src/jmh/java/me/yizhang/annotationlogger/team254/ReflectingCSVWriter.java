@@ -1,4 +1,4 @@
-package com.team254;
+package me.yizhang.annotationlogger.team254;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

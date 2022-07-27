@@ -1,4 +1,4 @@
-package com.team254;
+package me.yizhang.annotationlogger.team254;
 
 public interface CSVWritable {
     String toCSV();

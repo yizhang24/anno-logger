@@ -50,7 +50,7 @@ public class BenchmarkStates {
             return mInstance;
         }
     }
-    
+
     /**
      * Each class here represents the methods that surround a benchmark.
      * 
@@ -63,7 +63,7 @@ public class BenchmarkStates {
 
     @State(Scope.Thread)
     public static class instances254 {
-        public src.perf.com.team254.ReflectingCSVWriter<TestData> mWriter;
+        public com.team254.ReflectingCSVWriter<TestData> mWriter;
 
         public static final String file = path + "254Log.csv";
 
@@ -86,7 +86,7 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            mWriter = new com.team254.lib.ReflectingCSVWriter<>(file, TestData.class);
+            mWriter = new com.team254.ReflectingCSVWriter<>(file, TestData.class);
         }
 
         @TearDown(Level.Iteration)
@@ -99,8 +99,8 @@ public class BenchmarkStates {
     @State(Scope.Thread)
     public static class instances1678r {
 
-        public src.perf.com.team1678.LoggingSystem reflectingLoggingSystem;
-        public src.perf.com.team1678.ReflectingLogStorage<TestData> reflectiveStorage;
+        public com.team1678.LoggingSystem reflectingLoggingSystem;
+        public com.team1678.ReflectingLogStorage<TestData> reflectiveStorage;
 
         @Setup(Level.Iteration)
         public void setup() {
@@ -121,8 +121,8 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            reflectingLoggingSystem = new com.team1678.lib.LoggingSystem();
-            reflectiveStorage = new com.team1678.lib.ReflectingLogStorage<>(TestData.class);
+            reflectingLoggingSystem = new com.team1678.LoggingSystem();
+            reflectiveStorage = new com.team1678.ReflectingLogStorage<>(TestData.class);
             reflectingLoggingSystem.register(reflectiveStorage, "1678ReflectiveLog.csv");
         }
 
@@ -136,8 +136,8 @@ public class BenchmarkStates {
     @State(Scope.Thread)
     public static class instances1678m {
 
-        public src.perf.com.team1678.LoggingSystem manualLoggingSystem;
-        public src.perf.com.team1678.LogStorage manualStorage = new com.team1678.lib.LogStorage();
+        public com.team1678.LoggingSystem manualLoggingSystem;
+        public com.team1678.LogStorage manualStorage = new com.team1678.LogStorage();
 
         @Setup(Level.Iteration)
         public void setup() {
@@ -158,7 +158,7 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            manualLoggingSystem = new com.team1678.lib.LoggingSystem();
+            manualLoggingSystem = new com.team1678.LoggingSystem();
 
             ArrayList<String> headers = new ArrayList<String>();
             headers.add("datax");
@@ -199,7 +199,7 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            newLoggingSystem = new me.yizhang.lib.LoggingSystem();
+            newLoggingSystem = new me.yizhang.annotationlogger.LoggingSystem();
             newLoggingSystem.registerObject(TestData.class, TestSample.getInstance().data);
             newLoggingSystem.setDirectory();
             newLoggingSystem.updateStorage();
@@ -207,7 +207,7 @@ public class BenchmarkStates {
 
         @TearDown(Level.Iteration)
         public void teardown() {
-            newLoggingSystem.getWriter().close();
+            newLoggingSystem.mLogWriter.close();
         }
     }
 

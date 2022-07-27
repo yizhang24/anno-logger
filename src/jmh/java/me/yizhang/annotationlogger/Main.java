@@ -8,8 +8,6 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Warmup;
 
-import src.perf.me.yizhang.annotationlogger.BenchmarkStates.TestSample;
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -22,21 +20,21 @@ public class Main {
 
     @Benchmark
     public void test254(BenchmarkStates.instances254 instance) {
-        instance.mWriter.add(TestSample.getInstance().data);
+        instance.mWriter.add(BenchmarkStates.TestSample.getInstance().data);
         instance.mWriter.write();
     }
 
     @Benchmark
     public void test1678r(BenchmarkStates.instances1678r instance) {
-        instance.reflectiveStorage.Add(TestSample.getInstance().data);
+        instance.reflectiveStorage.Add(BenchmarkStates.TestSample.getInstance().data);
         instance.reflectingLoggingSystem.Log();
     }
 
     @Benchmark
     public void test1678m(BenchmarkStates.instances1678m instance) {
         ArrayList<Double> x = new ArrayList<Double>();
-        x.add(TestSample.getInstance().data.datax);
-        x.add(TestSample.getInstance().data.datay);
+        x.add(BenchmarkStates.TestSample.getInstance().data.datax);
+        x.add(BenchmarkStates.TestSample.getInstance().data.datay);
         instance.manualStorage.addData(x);
         instance.manualLoggingSystem.Log();
         x.clear();

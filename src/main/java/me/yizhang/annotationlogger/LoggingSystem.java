@@ -42,7 +42,7 @@ public class LoggingSystem {
     private static String matchType;
     private static Integer matchNumber;
 
-    private LoggingSystem() {
+    public LoggingSystem() {
         mLogWriter = new LogWriter(mQueue);
         dateFormat.setTimeZone(TimeZone.getTimeZone("PST"));
     }
@@ -193,6 +193,10 @@ public class LoggingSystem {
         }
     }
 
+    public void updateStorage() {
+        mLogWriter.updateStorage(mStorage);
+    }
+    
     public void updateMatchInfo(String newEventName, String newMatchType, int newMatchNumber) {
         if (inCompetition) {
             return; // We already have match info

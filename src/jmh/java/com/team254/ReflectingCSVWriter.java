@@ -1,4 +1,4 @@
-package src.perf.com.team254;
+package com.team254;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

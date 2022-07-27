@@ -1,4 +1,4 @@
-package src.perf.com.team1678;
+package com.team1678;
 
 import java.util.ArrayList;
 import java.lang.reflect.Field;

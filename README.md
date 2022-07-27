@@ -6,22 +6,22 @@ Annotation Logger (better name pending) is an easy to use, clean, and fast way f
 
 # Usage
 ## Getting Started
-To ensure Annotation Logger runs when the robot is enabled, call
+To ensure Annotation Logger runs when the robot is enabled, on robot enable call:
 ```java
 LoggingSystem.getInstance().start()
 ``` 
 
-on robot enable, call
+on robot disable, call:
 
 ```java
 LoggingSystem.getInstance.end()
 ```
 
-on robot disable, and call
+and periodically when enabled call:
 ```java
 LoggingSystem.getInstance().queueLogs();
 ```
-periodically when the robot is enabled.
+
 ## Logging a class
 Add this line to the constructor of the class you want to log:
 ```java

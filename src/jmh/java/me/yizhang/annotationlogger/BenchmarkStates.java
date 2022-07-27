@@ -180,7 +180,7 @@ public class BenchmarkStates {
     @State(Scope.Thread)
     public static class instancesNewLogger {
 
-        public me.yizhang.annotationlogger.LoggingSystem newLoggingSystem;
+        public me.yizhang.annotationlogger.LoggingSystem loggingSystem;
 
         @Setup(Level.Iteration)
         public void setup() {
@@ -201,15 +201,15 @@ public class BenchmarkStates {
                 e.printStackTrace();
             }
 
-            newLoggingSystem = new me.yizhang.annotationlogger.LoggingSystem();
-            newLoggingSystem.registerObject(TestData.class, TestSample.getInstance().data);
-            newLoggingSystem.setDirectory();
-            newLoggingSystem.updateStorage();
+            loggingSystem = new me.yizhang.annotationlogger.LoggingSystem(true);
+            loggingSystem.registerObject(TestData.class, TestSample.getInstance().data);
+            loggingSystem.setDirectory();
+            loggingSystem.updateStorage();
         }
 
         @TearDown(Level.Iteration)
         public void teardown() {
-            newLoggingSystem.mLogWriter.close();
+            loggingSystem.mLogWriter.close();
         }
     }
 

@@ -42,7 +42,7 @@ public class Main {
 
     @Benchmark
     public void testNewLogger(BenchmarkStates.instancesNewLogger instance) {
-        instance.newLoggingSystem.queueLogs();
-        instance.newLoggingSystem.mLogWriter.log();
+        instance.loggingSystem.queueLogs();
+        instance.loggingSystem.mLogWriter.log();
     }
 }

@@ -54,7 +54,6 @@ public class LogWriter extends Thread {
     }
 
     public void close() {
-        System.out.println("Closing writer");
         for (int i = 0; i < storage.size(); i++) {
             storage.get(i).flush();
         }

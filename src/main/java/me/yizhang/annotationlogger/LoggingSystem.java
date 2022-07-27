@@ -22,7 +22,7 @@ public class LoggingSystem {
 
     // Constants
     private static final int kQueueCapacity = 1000001;
-    public static String kRootDirectory = "/home/lvuser/logs";
+    public final String kRootDirectory;
     
     public final LogWriter mLogWriter;
 
@@ -42,9 +42,17 @@ public class LoggingSystem {
     private static String matchType;
     private static Integer matchNumber;
 
-    public LoggingSystem() {
+    private final boolean isBenchmark;
+
+    public LoggingSystem(boolean benchmarking) {
         mLogWriter = new LogWriter(mQueue);
         dateFormat.setTimeZone(TimeZone.getTimeZone("PST"));
+        isBenchmark = benchmarking;
+        if (isBenchmark) {
+            kRootDirectory = "/Output Logs";
+        } else {
+            kRootDirectory = "/home/lvuser/logs";
+        }
     }
 
     public synchronized int registerObject(Class<?> loggedClass, Object loggedObject) {
@@ -88,7 +96,12 @@ public class LoggingSystem {
             headers.add(field.getName());
         }
 
-        String name = loggedClass.getSimpleName();
+        String name;
+        if (isBenchmark) {
+            name = "ANNOTATION_LOGGER";
+        } else {
+            name = loggedClass.getSimpleName();
+        }
         System.out.println("Logger registered " + name + " with " + String.join(", ", headers));
         LogStorage store = new LogStorage(name, headers);
         mStorage.add(store);
@@ -142,12 +155,9 @@ public class LoggingSystem {
         for (int i = 0; i < mElements.size(); i++) {
             ArrayList<Supplier<String>> values = mElements.get(i);
             String[] temp = new String[values.size()];
-
-            System.out.println("values size: " + values.size());
             for (int j = 0; j < values.size(); j++) {
                 temp[j] = values.get(j).get();
             }
-
             mQueue.add(new LogEntry(i, temp));
         }
     }
@@ -212,7 +222,7 @@ public class LoggingSystem {
 
     public static LoggingSystem getInstance() {
         if (mInstance == null) {
-            mInstance = new LoggingSystem();
+            mInstance = new LoggingSystem(false);
         }
         return mInstance;
     }

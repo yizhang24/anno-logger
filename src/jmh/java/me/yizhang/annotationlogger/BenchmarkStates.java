@@ -209,7 +209,7 @@ public class BenchmarkStates {
 
         @TearDown(Level.Iteration)
         public void teardown() {
-            loggingSystem.mLogWriter.close();
+            loggingSystem.reset();
         }
     }
 

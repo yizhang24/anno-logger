@@ -5,6 +5,6 @@ public class Params {
 
     public static final int num_rows = 1000000;
 
-    public static final int warmup_iterations = 0;
-    public static final int measured_iterations = 1;
+    public static final int warmup_iterations = 3;
+    public static final int measured_iterations = 5;
 }

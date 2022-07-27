@@ -109,35 +109,44 @@ public class LoggingSystem {
 
 
     public void setDirectory() {
-        // create logs folder if not present
-        File rootDirectory = new File(kRootDirectory);
-        if (!rootDirectory.isDirectory()) {
-            rootDirectory.mkdir();
-        }
 
-        Integer maxNum = 0;
-        for (final File entry : rootDirectory.listFiles()) {
-            try {
-                if (!entry.isDirectory()) { 
-                    continue;
-                }
-                String directory_name = entry.getName();
-                int char_index = directory_name.indexOf(")");
-                int num = Integer.parseInt(directory_name.substring(1, char_index));
-                if (num > maxNum) {
-                    maxNum = num;
-                }
-            } catch (Exception e) {
-                // Files that are not numbers are expected and ignored
+        String path = kRootDirectory;
+
+        if (!isBenchmark) {
+            // create logs folder if not present
+            File rootDirectory = new File(kRootDirectory);
+            if (!rootDirectory.isDirectory()) {
+                rootDirectory.mkdir();
             }
+
+            Integer maxNum = 0;
+            for (final File entry : rootDirectory.listFiles()) {
+                try {
+                    if (!entry.isDirectory()) {
+                        continue;
+                    }
+                    String directory_name = entry.getName();
+                    int char_index = directory_name.indexOf(")");
+                    int num = Integer.parseInt(directory_name.substring(1, char_index));
+                    if (num > maxNum) {
+                        maxNum = num;
+                    }
+                } catch (Exception e) {
+                    // Files that are not numbers are expected and ignored
+                }
+            }
+            maxNum++;
+
+            // get system time in milliseconds and convert to datetime in PST time zone
+            startTime = new Date(System.currentTimeMillis());
+
+            // format time in datetime and add to file name
+            path = kRootDirectory + "/(" + maxNum.toString() + ") " + dateFormat.format(startTime);
+
+            // create new directory
+            mLogDirectory = new File(path);
+            mLogDirectory.mkdir();
         }
-        maxNum++;
-
-        // get system time in milliseconds and convert to datetime in PST time zone
-        startTime = new Date(System.currentTimeMillis());
-
-        // format time in datetime and add to file name
-        String path = kRootDirectory + "/(" + maxNum.toString() + ") " + dateFormat.format(startTime);
 
         // create new directory
         mLogDirectory = new File(path);

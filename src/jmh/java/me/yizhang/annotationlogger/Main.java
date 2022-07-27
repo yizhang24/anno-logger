@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = Params.warmup_iterations, batchSize = Params.num_rows)
 @Measurement(iterations = Params.measured_iterations, batchSize = Params.num_rows)
-@Fork(1)
+@Fork(5)
 public class Main {
 
     @Benchmark
@@ -41,7 +41,7 @@ public class Main {
     }
 
     @Benchmark
-    public void testNewLogger(BenchmarkStates.instancesNewLogger instance) {
+    public void testAnnoLogger(BenchmarkStates.instancesNewLogger instance) {
         instance.loggingSystem.queueLogs();
         instance.loggingSystem.mLogWriter.log();
     }

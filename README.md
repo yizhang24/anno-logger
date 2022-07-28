@@ -46,4 +46,4 @@ Annotation Logger reflects over logged classes at startup, and caches references
 
 Runtime performance is equivalent to previously used reflective and direct access methods.  The main thread retrieves values and adds them to the queue, while the writer thread polls from the queue and writes to disk.
 
-Detailed benchmarks can be found [here](/src/jmh/java/me/yizhang/annotationlogger/README.md).
+Detailed benchmarks can be found [here](/src/jmh/java/me/yizhang/annotationlogger/).

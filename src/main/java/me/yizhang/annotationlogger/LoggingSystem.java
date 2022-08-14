@@ -49,7 +49,7 @@ public class LoggingSystem {
         dateFormat.setTimeZone(TimeZone.getTimeZone("PST"));
         isBenchmark = benchmarking;
         if (isBenchmark) {
-            kRootDirectory = "/Output Logs";
+            kRootDirectory = "./Output Logs";
         } else {
             kRootDirectory = "/home/lvuser/logs";
         }
@@ -98,7 +98,7 @@ public class LoggingSystem {
 
         String name;
         if (isBenchmark) {
-            name = "ANNOTATION_LOGGER";
+            name = "New";
         } else {
             name = loggedClass.getSimpleName();
         }

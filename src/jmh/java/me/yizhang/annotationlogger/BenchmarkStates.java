@@ -190,7 +190,7 @@ public class BenchmarkStates {
                 dir.mkdir();
             }
 
-            File output = new File(path + "NewLogger.csv");
+            File output = new File(path + "New_LOGS.csv");
             if (output.exists()) {
                 output.delete();
             }

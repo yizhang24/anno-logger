@@ -178,12 +178,12 @@ public class LoggingSystem {
         if (!running) {
             running = true;
             setDirectory();
-            mLogWriter.updateStorage(mStorage);
             System.out.println("Starting Logger");
-            if (mLogWriter.isAlive()) {
-                mLogWriter.interrupt();
+            mQueue.clear();
+            mLogWriter.updateStorage(mStorage);
+            if(!mLogWriter.isAlive()) {
+                mLogWriter.start();
             }
-            mLogWriter.start();
         }
     }
 
@@ -195,7 +195,8 @@ public class LoggingSystem {
         if (running) {
             running = false;
 
-            mLogWriter.end();
+            mLogWriter.flush();
+            mQueue.clear();
 
             if (inCompetition) {
                 try {

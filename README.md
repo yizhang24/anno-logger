@@ -41,6 +41,9 @@ public String myString() {
 ## Output
 Annotation Logger writes each class to it's own CSV.  Logs are stored in `/home/lvuser/logs` on the RoboRIO.
 
+## Note
+Timestamps are not automatically logged.  Ensure that each class has logged timestamp variable to include timing data.
+
 # Performance
 Annotation Logger reflects over logged classes at startup, and caches references to fields and methods.  The increased startup time is a non-issue for FRC, as CAN devices and the radio will take much longer to come online.  
 

@@ -1,16 +1,14 @@
 package me.yizhang.annotationlogger;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class LogWriter extends Thread {
     
-    private final ArrayDeque<LogEntry> queue;
+    private final ArrayBlockingQueue<LogEntry> queue;
     private ArrayList<LogStorage> storage;
 
-    private boolean running = false;
-
-    public LogWriter(ArrayDeque<LogEntry> queue) {
+    public LogWriter(ArrayBlockingQueue<LogEntry> queue) {
         super("LogWriter");
         this.queue = queue;
     }
@@ -20,20 +18,9 @@ public class LogWriter extends Thread {
     }
 
     public void run() {
-
-        running = true;
-
         while (true) {
-            if (!running && queue.isEmpty()) {
-                close();
-                this.interrupt();
-            }
             log();
         }
-    }
-
-    public void end() {
-        running = false;
     }
 
     public void log() {
@@ -41,11 +28,18 @@ public class LogWriter extends Thread {
             return;
         }
         
-        LogEntry entry = queue.pop();
+        LogEntry entry;
+        try {
+            entry = queue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return;
+        }
 
         LogStorage store = storage.get(entry.getTarget());
 
         store.writeData(entry.getValues());
+        flush();
     }
 
     public void flush() {

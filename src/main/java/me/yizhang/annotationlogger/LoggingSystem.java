@@ -209,7 +209,7 @@ public class LoggingSystem {
                 System.out.println("Renaming DIR");
                 try {
                     String path = kRootDirectory + "/" + eventName + " " + matchType + " Match "
-                            + matchNumber.toString() + "_" + dateFormat.format(startTime);
+                            + matchNumber.toString() + " (" + dateFormat.format(startTime) + ")";
                     System.out.println("Trying to rename dir to: " + path);
                     if(mLogDirectory.renameTo(new File(path))){
                         System.out.println("Renamed Log Directory");
@@ -219,9 +219,7 @@ public class LoggingSystem {
                 } catch (NoSuchElementException e) {
                     // No-op
                 }
-
             }
-
         }
     }
 
